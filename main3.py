@@ -19,9 +19,13 @@ flute = pygame.image.load("img/flute.png")
 fluterect = flute.get_rect(x=230, y=570)
 fluteFollow = True
 
-whitetotoro = pygame.image.load("img/whitetotorosmall.png")
-whitetotoroRect = whitetotoro.get_rect(x=1400, y=620)
+
+whitetotoroRight = pygame.image.load("img/whitetotorosmall.png")
+whitetotoroRect = whitetotoroRight.get_rect(x=1400, y=620)
 whitetotoroFollow = False
+
+whitetotoro = whitetotoroRight
+whitetotoroLeft = pygame.image.load("img/whitetotoroLeft.png")
 
 totororect = totororight.get_rect()
 # tree = pygame.image.load("img/elmtree.png")
@@ -81,6 +85,7 @@ while gameon:
     
     if direction == "right":
         if backgroundx >= -4147 + 1280:
+            whitetotoro = whitetotoroRight
             backgroundx = backgroundx - speed
             bushrect.centerx = bushrect.centerx - speed - foregroundspeed
             bushCollisionRect.centerx = bushrect.centerx
@@ -94,6 +99,7 @@ while gameon:
     if direction == "left":
         if not backgroundx >= 1:
             backgroundx = backgroundx + speed
+            whitetotoro = whitetotoroLeft
             # treex = treex + 3
             bushrect.centerx = bushrect.centerx + speed + foregroundspeed
             bushCollisionRect.centerx = bushrect.centerx
@@ -119,7 +125,7 @@ while gameon:
             totororect.centery = totororect.centery + 3
             if whitetotoroFollow and whitetotoroRect.y < 620:
                 whitetotoroRect.centery = whitetotoroRect.centery + 3
-            if fluteFollow and fluterect.y < 620:
+            if fluteFollow and fluterect.y < 570:
                 fluterect.centery = fluterect.centery + 3
         else:
             jumpdirection = "stop"
@@ -128,10 +134,15 @@ while gameon:
             (whitetotoroRect.colliderect(bushCollisionRect)):
         print("murp")
         fluteFollow = False
+        fluterect.x = bushrect.x - 150
+        fluterect.y = 650
     if totororect.colliderect(bushCollisionRect2) or \
             (whitetotoroRect.colliderect(bushCollisionRect2)):
         print("meh")
         whitetotoroFollow = False
+        fluteFollow = False
+        fluterect.x = bush2rect.x - 150
+        fluterect.y = 650
     
     if totororect.colliderect(whitetotoroRect):
         whitetotoroFollow = True
@@ -141,16 +152,11 @@ while gameon:
             # whitetotoroRect.centerx = whitetotoroRect.centerx - speed - 1
         whitetotoroRect.centerx = totororect.centerx - 150
     
-    
-    
-    if totororect.colliderect(fluterect):
+    if totororect.colliderect(fluterect) and not fluteFollow:
         fluteFollow = True
         fluterect.y = 570
-        fluterect.centerx = totororect.centerx - 0
-
-    if totororect.colliderect(bushCollisionRect):
-        fluteFollow = False
-
+        
+        fluterect.centerx = totororect.centerx
     if totororect.colliderect(acornsrect):
         if not acornplay:
             plop.play()
