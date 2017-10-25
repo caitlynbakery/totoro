@@ -13,7 +13,10 @@ forest = pygame.image.load("img/forestoil.jpg")
 totororight = pygame.image.load("img/totororight.png")
 totoroleft = pygame.image.load("img/totoroleft.png")
 acorns = pygame.image.load("img/acorns.png")
-acornsrect = acorns.get_rect(x=2000, y=220)
+acornsrect = acorns.get_rect(x=1600, y=220)
+
+robot = pygame.image.load("img/robot.png")
+robotrect = robot.get_rect(x=4200, y=100)
 
 flute = pygame.image.load("img/flute.png")
 fluterect = flute.get_rect(x=230, y=570)
@@ -81,6 +84,7 @@ while gameon:
     screen.blit(bush, (bush2rect))
     screen.blit(acorns, acornsrect)
     screen.blit(flute, fluterect)
+    screen.blit(robot, robotrect)
     
     
     if direction == "right":
@@ -92,6 +96,7 @@ while gameon:
             bush2rect.centerx = bush2rect.centerx - speed - foregroundspeed
             bushCollisionRect2.centerx = bush2rect.centerx
             acornsrect.centerx = acornsrect.centerx - speed 
+            robotrect.centerx = robotrect.centerx - speed - 1
             if not whitetotoroFollow:
                 whitetotoroRect.centerx = whitetotoroRect.centerx - speed - 1
             if not fluteFollow:
@@ -106,6 +111,7 @@ while gameon:
             bush2rect.centerx = bush2rect.centerx + speed + foregroundspeed
             bushCollisionRect2.centerx = bush2rect.centerx
             acornsrect.centerx = acornsrect.centerx + speed 
+            robotrect.centerx = robotrect.centerx + speed + 1
             if not whitetotoroFollow:
                 whitetotoroRect.centerx = whitetotoroRect.centerx + speed + 1
             if not fluteFollow:
