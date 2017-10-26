@@ -15,8 +15,11 @@ totoroleft = pygame.image.load("img/totoroleft.png")
 acorns = pygame.image.load("img/acorns.png")
 acornsrect = acorns.get_rect(x=1600, y=220)
 
+flowers = pygame.image.load("img/flowers.png")
+flowersrect = flowers.get_rect(x=4000, y=100)
+
 robot = pygame.image.load("img/robot.png")
-robotrect = robot.get_rect(x=4200, y=100)
+robotrect = robot.get_rect(x=4200, y=60)
 
 flute = pygame.image.load("img/flute.png")
 fluterect = flute.get_rect(x=230, y=570)
@@ -85,6 +88,7 @@ while gameon:
     screen.blit(acorns, acornsrect)
     screen.blit(flute, fluterect)
     screen.blit(robot, robotrect)
+
     
     
     if direction == "right":
@@ -97,6 +101,7 @@ while gameon:
             bushCollisionRect2.centerx = bush2rect.centerx
             acornsrect.centerx = acornsrect.centerx - speed 
             robotrect.centerx = robotrect.centerx - speed - 1
+            flowersrect.centerx = flowersrect.centerx - speed - 1
             if not whitetotoroFollow:
                 whitetotoroRect.centerx = whitetotoroRect.centerx - speed - 1
             if not fluteFollow:
@@ -112,6 +117,7 @@ while gameon:
             bushCollisionRect2.centerx = bush2rect.centerx
             acornsrect.centerx = acornsrect.centerx + speed 
             robotrect.centerx = robotrect.centerx + speed + 1
+            flowersrect.centerx = flowersrect.centerx + speed + 1
             if not whitetotoroFollow:
                 whitetotoroRect.centerx = whitetotoroRect.centerx + speed + 1
             if not fluteFollow:
@@ -163,6 +169,12 @@ while gameon:
         fluterect.y = 570
         
         fluterect.centerx = totororect.centerx
+
+    if totororect.colliderect(robotrect):
+        print("panda")
+        screen.blit(flowers, flowersrect)
+        print(flowersrect.x)
+
     if totororect.colliderect(acornsrect):
         if not acornplay:
             plop.play()
