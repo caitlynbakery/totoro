@@ -25,6 +25,7 @@ flute = pygame.image.load("img/flute.png")
 fluterect = flute.get_rect(x=230, y=570)
 fluteFollow = True
 
+end = pygame.image.load("img/satsuki.png")
 
 whitetotoroRight = pygame.image.load("img/whitetotorosmall.png")
 whitetotoroRect = whitetotoroRight.get_rect(x=1400, y=620)
@@ -58,7 +59,7 @@ totororect.centery = 570
 bushx = 1000
 backgroundx = 0
 
-speed = 1
+speed = 10
 direction = "right"
 jumpdirection = "stop"
 foregroundspeed = 2
@@ -171,9 +172,7 @@ while gameon:
         fluterect.centerx = totororect.centerx
 
     if totororect.colliderect(robotrect):
-        print("panda")
         screen.blit(flowers, flowersrect)
-        print(flowersrect.x)
 
     if totororect.colliderect(acornsrect):
         if not acornplay:
@@ -181,6 +180,12 @@ while gameon:
             acornplay = True
     else:
         acornplay = False
+
+    if backgroundx < -4147 + 1280:
+        print("reached end :)")
+        screen.blit(end, (0, 0))
+        totorosong.stop()
+    print(backgroundx)
 
     clock.tick(FPS)
     pygame.display.update()
