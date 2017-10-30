@@ -50,6 +50,7 @@ totorosong = pygame.mixer.Sound("snd/totoro-song.wav")
 totorosong.play()
 
 endsong = pygame.mixer.Sound('snd/end.wav')
+endscreen = False
 plop = pygame.mixer.Sound("snd/blop2.wav")
 acornplay = False
 
@@ -60,7 +61,7 @@ totororect.centery = 570
 bushx = 1000
 backgroundx = 0
 
-speed = 10
+speed = 1
 direction = "right"
 jumpdirection = "stop"
 foregroundspeed = 2
@@ -186,7 +187,9 @@ while gameon:
         print("reached end :)")
         screen.blit(end, (0, 0))
         totorosong.stop()
-        endsong.play()
+        if not endscreen:
+            endsong.play()
+            endscreen = True
     print(backgroundx)
 
     clock.tick(FPS)
