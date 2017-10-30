@@ -25,7 +25,7 @@ flute = pygame.image.load("img/flute.png")
 fluterect = flute.get_rect(x=230, y=570)
 fluteFollow = True
 
-end = pygame.image.load("img/satsuki.png")
+end = pygame.image.load("img/gameover.png")
 
 whitetotoroRight = pygame.image.load("img/whitetotorosmall.png")
 whitetotoroRect = whitetotoroRight.get_rect(x=1400, y=620)
@@ -49,6 +49,7 @@ totoro = totororight
 totorosong = pygame.mixer.Sound("snd/totoro-song.wav")
 totorosong.play()
 
+endsong = pygame.mixer.Sound('snd/end.wav')
 plop = pygame.mixer.Sound("snd/blop2.wav")
 acornplay = False
 
@@ -185,6 +186,7 @@ while gameon:
         print("reached end :)")
         screen.blit(end, (0, 0))
         totorosong.stop()
+        endsong.play()
     print(backgroundx)
 
     clock.tick(FPS)
